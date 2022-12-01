@@ -10,7 +10,7 @@ const plantsSchema = require('./plants.schema');
 // using a ternary to set up sqlite for testing
 
 const DATABASE_URL = process.env.NODE_ENV === 'test'
-  ? process.env.DATABASE_URL // changing from 'sqlite::memory' b/c it wasn't working
+  ?  'sqlite:memory'
   : process.env.DATABASE_URL;
 
 
