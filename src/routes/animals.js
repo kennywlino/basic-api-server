@@ -35,8 +35,9 @@ router.delete('/animal/:id', async (req, res, next) => {
       where: {
         id,
       },
+      returning: true,
     });
-    res.status(200).send('Animal was deleted.');
+    res.status(200).send(null);
   } catch(e) {
     next(e);
   }
@@ -53,6 +54,20 @@ router.post('/animal', async (req, res, next) => {
 });
 
 // PUT (update) a single animal
+router.put('/animal/:id', async (req, res, next) => {
+  try {
+    let id = req.params.id;
+    const selectedAnimal = await AnimalModel.update(req.body, {
+      where: {
+        id,
+      },
+      returning: true,
+    });
+    res.status(200).send(selectedAnimal[1][0]);
+  } catch(e) {
+    next(e);
+  }
+});
 
 
 module.exports = router;

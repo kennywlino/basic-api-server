@@ -13,5 +13,5 @@ module.exports = (sequelizeDB, DataTypes) => sequelizeDB.define('plants', {
     type: DataTypes.ENUM,
     values: ['flowers', 'conifers', 'ferns', 'mosses'],
     allowNull: false,
-  }
+  },
 });
