@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
-const customersSchema = require('./customers.schema');
+const animalsSchema = require('./animals.schema');
 
 // 'postgres://localhost:5432/api-app
 // 'postgres://username:password@localhost:5432/api-app' <--- if using username/password
@@ -24,11 +24,11 @@ const sequelizeDB = new Sequelize(DATABASE_URL, {
   },
 });
 
-// create a customer model with the schema
+// create a animal model with the schema
 
-const CustomerModel = customersSchema(sequelizeDB, DataTypes);
+const AnimalModel = animalsSchema(sequelizeDB, DataTypes);
 
 module.exports = {
   sequelizeDB,
-  CustomerModel,
+  AnimalModel,
 };
