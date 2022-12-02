@@ -10,7 +10,7 @@ const plantsSchema = require('./plants.schema');
 // using a ternary to set up sqlite for testing
 
 const DATABASE_URL = process.env.NODE_ENV === 'test'
-  ?  'sqlite::memory'
+  ?  'sqlite:memory'
   : process.env.DATABASE_URL;
 
 
@@ -27,14 +27,14 @@ const sequelizeDB = new Sequelize(DATABASE_URL, {
 
 // create an animal model with the schema
 
-const AnimalModel = animalsSchema(sequelizeDB, DataTypes);
+const animalModel = animalsSchema(sequelizeDB, DataTypes);
 
 // creates a plant model with the schema
 
-const PlantModel = plantsSchema(sequelizeDB, DataTypes);
+const plantModel = plantsSchema(sequelizeDB, DataTypes);
 
 module.exports = {
   sequelizeDB,
-  AnimalModel,
-  PlantModel,
+  animalModel,
+  plantModel,
 };

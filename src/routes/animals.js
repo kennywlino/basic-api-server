@@ -2,14 +2,14 @@
 
 const express = require('express');
 // this needs to be changed
-const { AnimalModel } = require('../models');
+const { animalModel } = require('../models');
 
 const router = express.Router();
 
 // GET all animals
 router.get('/animal', async (req, res, next) => {
   try {
-    const animals = await AnimalModel.findAll();
+    const animals = await animalModel.findAll();
     res.status(200).send(animals);
   } catch(e) {
     next(e);
@@ -20,7 +20,7 @@ router.get('/animal', async (req, res, next) => {
 router.get('/animal/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const selectedAnimal = await AnimalModel.findByPk(id);
+    const selectedAnimal = await animalModel.findByPk(id);
     res.status(200).send(selectedAnimal);
   } catch(e) {
     next(e);
@@ -31,12 +31,7 @@ router.get('/animal/:id', async (req, res, next) => {
 router.delete('/animal/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const selectedAnimal = await AnimalModel.destroy({
-      where: {
-        id,
-      },
-      returning: true,
-    });
+    const selectedAnimal = await animalModel.destroy({ where: {id} });
     res.status(200).send(null);
   } catch(e) {
     next(e);
@@ -46,7 +41,7 @@ router.delete('/animal/:id', async (req, res, next) => {
 // POST a new animal
 router.post('/animal', async (req, res, next) => {
   try {
-    const newAnimal = await AnimalModel.create(req.body);
+    const newAnimal = await animalModel.create(req.body);
     res.status(200).send(newAnimal);
   } catch(e) {
     next(e);
@@ -57,13 +52,9 @@ router.post('/animal', async (req, res, next) => {
 router.put('/animal/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const selectedAnimal = await AnimalModel.update(req.body, {
-      where: {
-        id,
-      },
-      returning: true,
-    });
-    res.status(200).send(selectedAnimal[1][0]);
+    const selectedAnimal = await animalModel.update(req.body, { where: { id } });
+    const updatedAnimal = await animalModel.findByPk(id);
+    res.status(200).send(updatedAnimal);
   } catch(e) {
     next(e);
   }

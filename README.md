@@ -57,4 +57,4 @@ i.e.
 
 #### UML
 
-![Class-02 UML](./assets/class-03_UML.jpeg)
+![Class-03 UML](./assets/class-03_UML.jpeg)
