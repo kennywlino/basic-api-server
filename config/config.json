@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "kennywlino",
+    "username": "root",
     "password": null,
     "database": "api-app",
     "host": "127.0.0.1",

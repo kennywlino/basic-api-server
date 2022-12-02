@@ -2,14 +2,14 @@
 
 const express = require('express');
 // this needs to be changed
-const { PlantModel } = require('../models');
+const { plantModel } = require('../models');
 
 const router = express.Router();
 
 // GET all plants
 router.get('/plant', async (req, res, next) => {
   try {
-    const plants = await PlantModel.findAll();
+    const plants = await plantModel.findAll();
     res.status(200).send(plants);
   } catch(e) {
     next(e);
@@ -20,7 +20,7 @@ router.get('/plant', async (req, res, next) => {
 router.get('/plant/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const selectedPlant = await PlantModel.findByPk(id);
+    const selectedPlant = await plantModel.findByPk(id);
     res.status(200).send(selectedPlant);
   } catch(e) {
     next(e);
@@ -31,12 +31,7 @@ router.get('/plant/:id', async (req, res, next) => {
 router.delete('/plant/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const selectedPlant = await PlantModel.destroy({
-      where: {
-        id,
-      },
-      returning: true,
-    });
+    const selectedPlant = await plantModel.destroy({ where: { id } });
     res.status(200).send(null);
   } catch(e) {
     next(e);
@@ -46,7 +41,7 @@ router.delete('/plant/:id', async (req, res, next) => {
 // POST a new plant
 router.post('/plant', async (req, res, next) => {
   try {
-    const newPlant = await PlantModel.create(req.body);
+    const newPlant = await plantModel.create(req.body);
     res.status(200).send(newPlant);
   } catch(e) {
     next(e);
@@ -57,13 +52,9 @@ router.post('/plant', async (req, res, next) => {
 router.put('/plant/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const selectedPlant = await PlantModel.update(req.body, {
-      where: {
-        id,
-      },
-      returning: true,
-    });
-    res.status(200).send(selectedPlant[1][0]);
+    const selectedPlant = await plantModel.update(req.body, { where: { id } });
+    const updatedPlant = await plantModel.findByPk(id);
+    res.status(200).send(updatedPlant);
   } catch(e) {
     next(e);
   }
