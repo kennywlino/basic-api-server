@@ -12,7 +12,7 @@ This application serves as an example for how to create an SQL database and conn
 
 - [ci/cd](https://github.com/kennywlino/basic-api-server/actions/)
 - [back-end server (production)](https://basic-api-server-uhbc.onrender.com/)
-- [Main PR from dev](https://github.com/kennywlino/basic-api-server/pull/1)
+- [Main PR from dev](https://github.com/kennywlino/basic-api-server/pull/2)
 
 ### Setup
 
