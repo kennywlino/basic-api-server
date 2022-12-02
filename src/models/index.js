@@ -16,14 +16,7 @@ const DATABASE_URL = process.env.NODE_ENV === 'test'
 
 // instantiate the sequelize connection to our database
 
-const sequelizeDB = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
-});
+const sequelizeDB = new Sequelize(DATABASE_URL);
 
 // create an animal model with the schema
 
